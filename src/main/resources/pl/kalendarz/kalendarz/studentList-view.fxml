@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kalendarz.kalendarz.StudentListController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="backButton" layoutX="33.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" text="powrót" />
+            <TableView fx:id="tableView" layoutX="78.0" layoutY="76.0" prefHeight="271.0" prefWidth="437.0">
+              <columns>
+                  <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="firstName" prefWidth="75.0" text="Imie" />
+                  <TableColumn fx:id="lastName" minWidth="0.0" prefWidth="113.5" text="Nazwisko" />
+                  <TableColumn fx:id="dayOfWeek" prefWidth="104.0" text="Dzien" />
+                  <TableColumn fx:id="time" prefWidth="142.0" text="Godzina" />
+              </columns>
+            </TableView>
+            <Button fx:id="addStudentButton" layoutX="232.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAddStudentView" text="Dodaj Ucznia" />
+            <Button fx:id="deleteStudentButton" layoutX="442.0" layoutY="14.0" mnemonicParsing="false" onAction="#openDeleteStudentView" text="Usun Ucznia" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
