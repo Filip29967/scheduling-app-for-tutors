@@ -1,4 +1,4 @@
-# Scheduling app for tutors
+# ⚠️ **DROPED** Scheduling app for tutors
 ## Contents
 * [General Info](#general-info)
 * [Features](#features)
