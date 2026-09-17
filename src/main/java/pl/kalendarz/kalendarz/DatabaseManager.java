@@ -70,8 +70,7 @@ public class DatabaseManager {
     public void insertStudent(String firstName, String lastName, String dayOfWeek, LocalTime time) {
         String addTable = "INSERT INTO uczniowie(Imie , Nazwisko , Dzien ,Godzina)" +
                 "VALUES (?,?,?,?);";
-        Connection connection = getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(addTable)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(addTable)) {
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, dayOfWeek);
@@ -104,5 +103,17 @@ public class DatabaseManager {
             throw new RuntimeException(e);
         }
         return students;
+    }
+    public void editStudent(int id, String firstName, String lastName, String dayOfWeek, LocalTime time) throws SQLException {
+        String query = "UPDATE uczniowie SET Imie = ?, Nazwisko = ?, Dzien = ?, Godzina = ? WHERE id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            statement.setString(3, dayOfWeek);
+            statement.setString(4, time.toString());
+            statement.setInt(5, id);
+            statement.executeUpdate();
+        }
     }
 }

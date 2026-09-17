@@ -7,7 +7,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.time.LocalTime;
 
-public class StudentAddController {
+public class EditController
+{
+    @FXML
+    private Button saveButton;
     @FXML
     private Label statusLabel;
     @FXML
@@ -23,6 +26,16 @@ public class StudentAddController {
     @FXML
     private Button backButton;
 
+    private Student student;
+
+    public void setStudent(Student student) {
+        this.student = student;
+        firstNameTextField.setText(student.getFirstName());
+        lastNameTextField.setText(student.getLastName());
+        dayComboBox.setValue(student.getDayOfWeek());
+        hourComboBox.setValue(student.getTime().getHour());
+        minuteComboBox.setValue(student.getTime().getMinute());
+    }
     @FXML
     public void goBack() {
         try {
@@ -36,9 +49,15 @@ public class StudentAddController {
             throw new RuntimeException(e);
         }
     }
-
     @FXML
-    public void addStudent() {
+    public void initialize()
+    {
+        dayComboBox.getItems().addAll("Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela");
+        for (int i = 0; i < 24; i++) hourComboBox.getItems().add(i);
+        for (int i = 0; i < 60; i++) minuteComboBox.getItems().add(i);
+    }
+    @FXML
+    public void saveStudent() {
         if (firstNameTextField.getText().isBlank() || lastNameTextField.getText().isBlank() || 
             dayComboBox.getValue() == null || hourComboBox.getValue() == null || minuteComboBox.getValue() == null) {
             statusLabel.setText("Uzupełnij wszystkie pola!");
@@ -49,22 +68,11 @@ public class StudentAddController {
 
         try {
             DatabaseManager db = new DatabaseManager();
-            db.insertStudent(firstNameTextField.getText(), lastNameTextField.getText(), dayComboBox.getValue(), time);
-            System.out.println("Uczeń dodany");
-            statusLabel.setText("Dodano!!!");
+            db.editStudent(student.getId(), firstNameTextField.getText(), lastNameTextField.getText(), dayComboBox.getValue(), time);
+            statusLabel.setText("Zapisano!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            statusLabel.setText("Nie dodano");
+            statusLabel.setText("Nie udało się zapisać");
         }
     }
-
-    @FXML
-    public void initialize() {
-        dayComboBox.getItems().addAll("Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela");
-        for (int i = 0; i < 24; i++) hourComboBox.getItems().add(i);
-        for (int i = 0; i < 60; i++) minuteComboBox.getItems().add(i);
-        hourComboBox.setValue(12);
-        minuteComboBox.setValue(0);
-    }
-
 }

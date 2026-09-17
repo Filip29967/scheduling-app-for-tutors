@@ -12,9 +12,9 @@ public class SchedulerApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SchedulerApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
+        scene.getStylesheets().add(SchedulerApplication.class.getResource("style.css").toExternalForm());
         stage.setTitle("Kalendarz Korepetytora");
         stage.setScene(scene);
         stage.show();
-
     }
 }

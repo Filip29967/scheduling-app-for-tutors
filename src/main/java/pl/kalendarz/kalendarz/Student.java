@@ -1,6 +1,8 @@
 package pl.kalendarz.kalendarz;
 
 
+import javafx.beans.property.SimpleBooleanProperty;
+
 import java.time.LocalTime;
 
 public class Student {
@@ -9,6 +11,7 @@ public class Student {
     private String lastName;
     private String dayOfWeek;
     private LocalTime time;
+    private final SimpleBooleanProperty selected = new SimpleBooleanProperty(false);
 
     public Student(int id, String firstName, String lastName, String dayOfWeek, LocalTime time) {
         this.id = id;
@@ -16,6 +19,15 @@ public class Student {
         this.lastName = lastName;
         this.dayOfWeek = dayOfWeek;
         this.time = time;
+    }
+    public Boolean isSelected() {
+        return selected.get();
+    }
+    public void setSelected(Boolean val) {
+        this.selected.set(val);
+    }
+    public SimpleBooleanProperty selectedProperty() {
+        return selected;
     }
 
     public int getId() {

@@ -21,6 +21,7 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(SchedulerApplication.class.getResource("studentList-view.fxml"));
             Stage stage = (Stage) studentButton.getScene().getWindow();
             Scene scene = new Scene(loader.load(), 1000, 700);
+            scene.getStylesheets().add(SchedulerApplication.class.getResource("style.css").toExternalForm());
             stage.setTitle("Lista Uczniów");
             stage.setScene(scene);
 
